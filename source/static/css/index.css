@@ -1,7 +1,35 @@
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa/Comfortaa-Bold.ttf);
+    font-weight: 900;  
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa/Comfortaa-SemiBold.ttf);
+    font-weight: 700;     
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa/Comfortaa-Medium.ttf);
+    font-weight: 500;     
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa/Comfortaa-Regular.ttf);
+    font-weight: 300;     
+}
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../fonts/Comfortaa/Comfortaa-Light.ttf);
+    font-weight: 100;     
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Comfortaa;
+    font-weight: 500;
 }
 
 body {
@@ -20,10 +48,14 @@ body {
 .ProgressBarBodyL1, .ProgressBarBodyL2, .ProgressBarBodyL3 {
     width: 600px;
     height: 300px;
-    border: solid yellowgreen 2px;
     background-position: 30px;
     transition: 2000ms linear;
     will-change: transform;
+    /*
+    mask-image: url(../img/image_2.png);
+    -webkit-mask-image: url(../img/image_2.png);
+    mask-size: contain;
+    -webkit-mask-size: contain;*/
 }
 .ProgressBarBodyL1 {
     background-image: url(../img/WaveL1.png);

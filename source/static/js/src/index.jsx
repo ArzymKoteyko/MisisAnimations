@@ -10,7 +10,7 @@ class ProgressBar extends React.Component {
             cordL1: 0,
             cordL2: 0,
             cordL3: 0,
-            progress: 0,
+            progress: 150,
             speedL1: 400,
             speedL2: -300,
             speedL3: 200,
@@ -125,4 +125,27 @@ ReactDOM.render(
     <ProgressBar
     />,
     document.getElementById('ProgressBar')
+)
+
+import { Fireworks } from 'fireworks-js/dist/react'
+
+const options = {
+    speed: 3,
+    particles: 200,
+    explosion: 3,
+    gravity: 2,
+    friction: 0.97,
+}
+const style = {
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    position: 'fixed',
+    background: '#000'
+}
+
+ReactDOM.render(
+    <Fireworks options={options} style={style} />,
+    document.getElementById('Fireworks')
 )
