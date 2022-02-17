@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+.ProgressBar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ProgressBarBodyL1, .ProgressBarBodyL2, .ProgressBarBodyL3 {
+    width: 600px;
+    height: 300px;
+    border: solid yellowgreen 2px;
+    background-position: 30px;
+    transition: 2000ms linear;
+    will-change: transform;
+}
+.ProgressBarBodyL1 {
+    background-image: url(../img/WaveL1.png);
+}
+.ProgressBarBodyL2 {
+    background-image: url(../img/WaveL2.png);
+}
+.ProgressBarBodyL3 {
+    background-image: url(../img/WaveL3.png);
+}
+.Button {
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+    background-color: red;
+    border: 2px blue solid;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 40px;
+}
