@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Fireworks } from 'fireworks-js/dist/react'
 
 
 
@@ -7,14 +8,11 @@ class ProgressBar extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            cordL1: 0,
-            cordL2: 0,
-            cordL3: 0,
-            progress: 8850,
-            speedL1: 200,
-            speedL2: -573,
-            speedL3: 297,
+            progress: 8800,
+            cords: [0,0,0],
+            speeds: [200, -573, 297],
             animate: true,
+            complete: false,
         }
     }
 
@@ -31,10 +29,10 @@ class ProgressBar extends React.Component {
     // running animation by moving bg layers from side to side
     updateCords() {
         this.setState({
-            cordL1: this.state.cordL1+this.state.speedL1,
-            cordL2: this.state.cordL2+this.state.speedL2,
-            cordL3: this.state.cordL3+this.state.speedL3,
-            progress: this.state.progress+10,
+            cords: [this.state.cords[0]+this.state.speeds[0],
+                     this.state.cords[1]+this.state.speeds[1],
+                     this.state.cords[2]+this.state.speeds[2]],
+            progress: this.state.progress+50,
         })
     }
 
@@ -81,46 +79,75 @@ class ProgressBar extends React.Component {
 
     componentDidMount() {
         // mount web socket
-        this.socket = io('192.168.0.136:89')
+        //this.socket = io('192.168.0.136:89')
         // read info
-        this.socket.on('click_count', (value) => {this.updateProgress(value)})
+        //this.socket.on('click_count', (value) => {this.updateProgress(value)})
         // start animation
         this.initAnimation()
     }
 
     handleClick = () => {
         console.log('Yep');
-        this.push()
+        //this.push()
     }
 
     render () {
-        this.s1 = {
-            backgroundPosition: this.state.cordL1+'px -' + this.state.progress+'px',
-            transition: this.state.animate ? '2000ms linear' : 'none',
+        this.wavestyles = [{},{},{}]
+        for (let i=0; i<3; i++) {
+            this.wavestyles[i] = {
+                backgroundPosition: this.state.cords[i] + 'px -' + this.state.progress + 'px',
+                transition: this.state.animate ? '2000ms linear' : 'none',
+            }
         }
-        this.s2 = {
-            backgroundPosition: this.state.cordL2+'px -' + this.state.progress+'px',
-            transition: this.state.animate ? '2000ms linear' : 'none',
-        }
-        this.s3 = {
-            backgroundPosition: this.state.cordL3+'px -' + this.state.progress+'px',
-            transition: this.state.animate ? '2000ms linear' : 'none',
-        }
-        return (<>
-        <div className="ProgressBarBodyL1"
-            style={this.s1}
-        >
-        <div className="ProgressBarBodyL2"
-            style={this.s2}
-        >
-        <div className="ProgressBarBodyL3"
-            style={this.s3}
-        ></div></div></div>
+
+        this.progressBar = 
+        <div className="ProgressBarWindow">
+            <div className="ProgressBarBodyL1"
+                style={this.wavestyles[0]}
+            >
+            <div className="ProgressBarBodyL2"
+                style={this.wavestyles[1]}
+            >
+            <div className="ProgressBarBodyL3"
+                style={this.wavestyles[2]}
+            ></div></div></div>
+        </div>
+
+        this.button = 
         <div
             className="Button"
             onClick={this.handleClick}
         >Тык</div>
-        </>)
+
+        const options = {
+            speed: 3,
+            particles: 200,
+            explosion: 3,
+            gravity: 2,
+            friction: 0.97,
+        }
+        const style = {
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            position: 'fixed',
+        }
+        this.fireworks = 
+        <Fireworks options={options} style={style}/>
+        
+        if (this.state.progress < 9350) {
+            return (<>
+                {this.progressBar}
+                {this.button}
+            </>)
+        }
+        else {
+            return (<>
+                {this.fireworks}
+            </>)
+        }
+        
     }
 }
 
@@ -130,26 +157,3 @@ ReactDOM.render(
     document.getElementById('ProgressBar')
 )
 
-import { Fireworks } from 'fireworks-js/dist/react'
-
-const options = {
-    speed: 3,
-    particles: 200,
-    explosion: 3,
-    gravity: 2,
-    friction: 0.97,
-}
-const style = {
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    position: 'fixed',
-}
-
-/*
-ReactDOM.render(
-    <Fireworks options={options} style={style} />,
-    document.getElementById('Fireworks')
-)
-*/
