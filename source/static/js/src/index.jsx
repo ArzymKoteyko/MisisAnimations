@@ -8,7 +8,7 @@ class ProgressBar extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            progress: 8800,
+            progress: 48.3,
             cords: [0,0,0],
             speeds: [200, -573, 297],
             animate: true,
@@ -32,7 +32,7 @@ class ProgressBar extends React.Component {
             cords: [this.state.cords[0]+this.state.speeds[0],
                      this.state.cords[1]+this.state.speeds[1],
                      this.state.cords[2]+this.state.speeds[2]],
-            progress: this.state.progress+50,
+            progress: this.state.progress+0.1,
         })
     }
 
@@ -95,7 +95,7 @@ class ProgressBar extends React.Component {
         this.wavestyles = [{},{},{}]
         for (let i=0; i<3; i++) {
             this.wavestyles[i] = {
-                backgroundPosition: this.state.cords[i] + 'px -' + this.state.progress + 'px',
+                backgroundPosition: this.state.cords[i] + 'px ' + this.state.progress + '%',
                 transition: this.state.animate ? '2000ms linear' : 'none',
             }
         }
@@ -157,3 +157,7 @@ ReactDOM.render(
     document.getElementById('ProgressBar')
 )
 
+function printCord(event) {
+    console.log(event.clientX, event.clientY)
+}
+document.addEventListener('click', printCord)

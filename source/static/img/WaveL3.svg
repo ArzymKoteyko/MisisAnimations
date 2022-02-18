@@ -5,9 +5,9 @@
    version="1.1"
    x="0px"
    y="0px"
-   width="3779.5276"
-   height="45354.332"
-   viewBox="0 0 3779.5274 45354.331"
+   width="250"
+   height="1500"
+   viewBox="0 0 249.99999 1500"
    xml:space="preserve"
    id="svg215"
    sodipodi:docname="WaveL3.svg"
@@ -25,9 +25,9 @@
    inkscape:pageopacity="0.0"
    inkscape:pagecheckerboard="0"
    showgrid="false"
-   inkscape:zoom="0.32"
-   inkscape:cx="2003.125"
-   inkscape:cy="22453.125"
+   inkscape:zoom="2.56"
+   inkscape:cx="151.95312"
+   inkscape:cy="813.67188"
    inkscape:window-width="1471"
    inkscape:window-height="991"
    inkscape:window-x="26"
@@ -57,17 +57,18 @@
    transform="translate(2500.03,-4722.8269)">
 	<g
    id="g200"
-   transform="matrix(-0.37795008,0,0,0.18078438,334.61086,26438.548)">
+   transform="matrix(-0.02494197,0,0,0.00343142,-2312.675,5460.4218)"
+   style="stroke-width:216.18605688;stroke-miterlimit:4;stroke-dasharray:none">
 		<path
    class="st0"
    d="m -2500.03,3833.07 c 144.82,-63.86 439.31,-213.85 632.35,-202.45 185.27,10.94 452.9,147.55 593.32,202.45 151.69,59.31 450.91,214.02 652.73,211.66 197.57,-2.31 481.72,-154.56 628.45,-213.5 141.05,-56.66 421.93,-201.32 611.91,-200.61 197.89,0.73 495.8,146.41 644.99,204.29 145.41,56.41 427.33,205.75 620.18,204.29 192.64,-1.46 616.05,-206.13 616.05,-206.13 L 2500,5000 h -4999.97 z"
    id="path196"
-   style="fill:#122c75;fill-opacity:1;stroke:#122c75;stroke-width:29.674;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+   style="fill:#122c75;fill-opacity:1;stroke:#122c75;stroke-width:216.18605688;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
 		<path
    class="st0"
    d="m 2500,3833.07 c 144.82,-63.86 439.31,-213.85 632.35,-202.45 185.27,10.94 452.9,147.55 593.32,202.45 151.69,59.31 450.91,214.02 652.73,211.66 197.57,-2.31 481.72,-154.56 628.45,-213.5 141.05,-56.66 421.93,-201.32 611.91,-200.61 197.89,0.73 495.8,146.41 644.99,204.29 145.41,56.41 427.33,205.75 620.18,204.29 192.64,-1.46 616.05,-206.13 616.05,-206.13 L 7500.04,5000 H 2500.06 Z"
    id="path198"
-   style="stroke:#122c75;stroke-width:29.674;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+   style="stroke:#122c75;stroke-width:216.18605688;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
 	</g>
 	<g
    class="st1"
@@ -94,12 +95,12 @@
    id="path210" />
 	</g>
 <rect
-   style="fill:#122c75;fill-opacity:1;fill-rule:evenodd;stroke:#122c75;stroke-width:50.0936;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+   style="fill:#122c75;fill-opacity:1;fill-rule:evenodd;stroke:#122c75;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
    id="rect576"
-   width="3779.5046"
-   height="22785.807"
-   x="-1279.4744"
-   y="27315.363"
+   width="247.67577"
+   height="748.52917"
+   x="2251.1921"
+   y="5477.0488"
    transform="scale(-1,1)" /></g>
 <style
    type="text/css"

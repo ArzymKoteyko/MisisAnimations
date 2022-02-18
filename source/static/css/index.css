@@ -55,8 +55,8 @@ body {
 .ProgressBarBodyL1, .ProgressBarBodyL2, .ProgressBarBodyL3 {
     width: 100%;
     height: 100%;
-    background-position: 30px;
-    background-size: 400%;
+    background-position: 0px 48.3%;
+    background-size: 100%;
     transition: 2000ms linear;
     will-change: transform;
     /*
