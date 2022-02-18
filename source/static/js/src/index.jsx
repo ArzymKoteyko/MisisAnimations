@@ -10,10 +10,10 @@ class ProgressBar extends React.Component {
             cordL1: 0,
             cordL2: 0,
             cordL3: 0,
-            progress: 150,
-            speedL1: 400,
-            speedL2: -300,
-            speedL3: 200,
+            progress: 8850,
+            speedL1: 200,
+            speedL2: -573,
+            speedL3: 297,
             animate: true,
         }
     }
@@ -34,6 +34,7 @@ class ProgressBar extends React.Component {
             cordL1: this.state.cordL1+this.state.speedL1,
             cordL2: this.state.cordL2+this.state.speedL2,
             cordL3: this.state.cordL3+this.state.speedL3,
+            progress: this.state.progress+10,
         })
     }
 
@@ -42,6 +43,7 @@ class ProgressBar extends React.Component {
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === 'visible') {
                 // remove start lag
+                console.log('visivle')
                 setTimeout( () => {
                     this.updateCords()
                 }, 50)
@@ -56,6 +58,7 @@ class ProgressBar extends React.Component {
                     animate: true,
                 })
             } else {
+                console.log('hidden')
                 // stop updationg back layers
                 clearInterval(this.timerID)
                 // disable animation
@@ -142,10 +145,11 @@ const style = {
     width: '100%',
     height: '100%',
     position: 'fixed',
-    background: '#000'
 }
 
+/*
 ReactDOM.render(
     <Fireworks options={options} style={style} />,
     document.getElementById('Fireworks')
 )
+*/
