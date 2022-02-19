@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Fireworks } from 'fireworks-js/dist/react'
-
+import { calc, point } from '@js-basics/vector';
+const vector = point;
 
 
 class ProgressBar extends React.Component {
@@ -159,54 +160,61 @@ ReactDOM.render(
     document.getElementById('ProgressBar')
 )
 
+class Particle {
+    constructor(pos, vel, acl, r, m) {
+        this.pos = pos;
+        this.vel = vel;
+        this.acl = acl;
+        this.r = r;
+        this.m = m;
+    }
+    calculateFriq() {
+        let K = 0.1;
+        let v = Math.sqrt((this.vel).dot(this.vel))
+        let a = calc(() => -(Math.pow(v, 4/2) * K * this.vel.normalize()));
+        return a;
+    }
+    calculateGravity(POS, M) {
+        let G = 1000;
+        let r = calc(() => POS - this.pos);
+        let a = calc(() => G * (Math.sqrt(M / r.dot(r))) * r.normalize());
+        return a; 
+    }
+    updateCords() {
+        let POS = vector(500, 500);
+        let M = 10;
+        let af = this.calculateFriq();
+        let ag = this.calculateGravity(POS, M);
+        this.acl = calc(() => af + ag);
+        this.vel = calc(() => this.vel + this.acl * 0.05);
+        this.pos = calc(() => this.pos + this.vel); 
+    }
+}
+
 class TouchParticle extends React.Component {
     constructor (props) {
         super(props);
         this.radius = 10;
         this.state = {
-            x: props.x,
-            y: props.y,
-            vx: 0,
-            vy: 3,
+            x: props.x, y: props.y,
+            vx: 0, vy: 3,
             r: this.radius,
             m: 1,
         };
-    }
-    findDistSqred = (x1, y1, x2, y2) => {
-        return Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2);
-    }
-    calculateFriq = (vx, vy) => {
-        let k = 0.01;
-        let vSqred = this.findDistSqred(0, 0, vx, vy);
-        let v = Math.pow(vSqred, 0.5);
-        let a = -(Math.pow(v, 3) * k);
-        let cosa = vx / v;
-        let sina = vy / v;
-        return {'x': cosa * a, 'y': sina * a}
-    }
-    calculateGravity = (x1, y1, m1, x2, y2, m2) => {
-        let G = 1000;
-        let distSqred = this.findDistSqred(x1, y1, x2, y2);
-        let dist = Math.pow(distSqred, 0.5);
-        let a = G * Math.pow( (m2 / (distSqred * m1)), 0.5);
-        let cosa = (x2 - x1) / dist;
-        let sina = (y2 - y1) / dist;
-        return {'x': cosa * a, 'y': sina * a};
+        this.particle = new Particle(vector(this.state.x,  this.state.y-200),
+                                     vector(this.state.vx, this.state.vy),
+                                     vector(           0,             0 ));
     }
     updateCords = () => {
-        let X = 500;
-        let Y = 500;
-        let M = 10;
-        let ag = this.calculateGravity(this.state.x, this.state.y, this.state.m, X, Y, M);
-        let af = this.calculateFriq(this.state.vx, this.state.vy);
-        let dvx = (ag['x'] + af['x']) * 0.05;
-        let dvy = (ag['y'] + af['y']) * 0.05;
+        this.particle.calculateFriq();
+        this.particle.calculateGravity()
+        this.particle.updateCords();
         this.setState({
-            vx: this.state.vx + dvx,
-            vy: this.state.vy + dvy,
-            x: this.state.x + this.state.vx,
-            y: this.state.y + this.state.vy,
-        });
+            vx: this.particle.vel.x,
+            vy: this.particle.vel.y,
+            x: this.particle.pos.x,
+            y: this.particle.pos.y,
+        })
     }
     componentDidMount () {
         setTimeout( ()=>{
@@ -240,3 +248,17 @@ function printCord(event) {
     console.log(event.clientX, event.clientY)
 }
 document.addEventListener('click', printCord)
+
+
+
+class TouchParticleSystem extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render () {
+        return;
+    }
+}
+
+let a = vector(1,2);
+console.log(a.x, a.y);
