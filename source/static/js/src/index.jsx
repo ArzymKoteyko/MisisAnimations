@@ -167,21 +167,22 @@ class Particle {
         this.acl = acl;
         this.r = r;
         this.m = m;
+        this.lifeTime = 0;
     }
     calculateFriq() {
-        let K = 0.1;
+        let K = 0.05;
         let v = Math.sqrt((this.vel).dot(this.vel))
         let a = calc(() => -(Math.pow(v, 4/2) * K * this.vel.normalize()));
         return a;
     }
     calculateGravity(POS, M) {
-        let G = 1000;
+        let G = 2000;
         let r = calc(() => POS - this.pos);
         let a = calc(() => G * (Math.sqrt(M / r.dot(r))) * r.normalize());
         return a; 
     }
     updateCords() {
-        let POS = vector(500, 500);
+        let POS = vector(500, 500+200);
         let M = 10;
         let af = this.calculateFriq();
         let ag = this.calculateGravity(POS, M);
@@ -191,74 +192,55 @@ class Particle {
     }
 }
 
-class TouchParticle extends React.Component {
-    constructor (props) {
-        super(props);
-        this.radius = 10;
-        this.state = {
-            x: props.x, y: props.y,
-            vx: 0, vy: 3,
-            r: this.radius,
-            m: 1,
-        };
-        this.particle = new Particle(vector(this.state.x,  this.state.y-200),
-                                     vector(this.state.vx, this.state.vy),
-                                     vector(           0,             0 ));
-    }
-    updateCords = () => {
-        this.particle.calculateFriq();
-        this.particle.calculateGravity()
-        this.particle.updateCords();
-        this.setState({
-            vx: this.particle.vel.x,
-            vy: this.particle.vel.y,
-            x: this.particle.pos.x,
-            y: this.particle.pos.y,
-        })
-    }
-    componentDidMount () {
-        setTimeout( ()=>{
-            this.setState({y: this.state.y - 200})
-            setInterval(this.updateCords, 10);
-        }, 510);
-    }
-    render () {
-        this.style = {
-            height: this.state.r*2,
-            width: this.state.r*2,
-            left: this.state.x-this.state.r,
-            top: this.state.y-this.state.r,
-        }
-        return (
-            <div style={this.style}></div>
-        )
-    }
-}
-
-let circles = []
-function printCord(event) {
-    let circle = <TouchParticle x={event.clientX} y={event.clientY}/>
-    circles.push(circle)
-    let circlesRenderer = circles.map((circle) => <li>{circle}</li>)
-    ReactDOM.render(
-        <ul>{circlesRenderer}</ul>,
-        document.getElementById('Circle')
-    )
-    
-    console.log(event.clientX, event.clientY)
-}
-document.addEventListener('click', printCord)
-
-
 
 class TouchParticleSystem extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            particles: [],
+        }
+    }
+    createParitcle = (event) => {   
+        this.state.particles.push(new Particle(vector(event.clientX, event.clientY),
+                                         vector(0, 3),
+                                         vector(0,0),
+                                         10,
+                                         1));
+        this.setState({
+            particles: this.state.particles,
+        })
+    }
+    updateParticles = () => {
+        for (let particle of this.state.particles) {
+            particle.lifeTime += 10;
+            if (particle.lifeTime > 500) {
+                particle.updateCords();
+            }
+            if (particle.lifeTime > 1000 * 10) {
+
+            }
+        }
+        this.setState({
+            particles: this.state.particles,
+        })
+    }
+    componentDidMount() {
+        document.addEventListener('click', this.createParitcle);
+        setInterval(() => {
+            this.updateParticles();
+        }, 10)
     }
     render () {
-        return;
+        let particleRenderer = this.state.particles.map(
+            (particle) => <li><div style={{left:   particle.pos.x-particle.r,
+                                           top:    particle.pos.y-particle.r,
+                                           height: particle.r*2,
+                                           width:  particle.r*2,}}>
+                          </div></li>)
+        return <ul>{particleRenderer}</ul>;
     }
 }
-
-let a = vector(1,2);
-console.log(a.x, a.y);
+ReactDOM.render(
+    <TouchParticleSystem/>,
+    document.getElementById('Circle')
+)
