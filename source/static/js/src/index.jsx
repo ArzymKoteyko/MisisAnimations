@@ -182,7 +182,7 @@ class Particle {
         return a; 
     }
     updateCords() {
-        let POS = vector(500, 500+200);
+        let POS = vector(500, 500);
         let M = 10;
         let af = this.calculateFriq();
         let ag = this.calculateGravity(POS, M);
@@ -211,14 +211,17 @@ class TouchParticleSystem extends React.Component {
         })
     }
     updateParticles = () => {
+        for (let i=0; i<this.state.particles.length; i++) {
+            if (this.state.particles[i].lifeTime > 2000) {
+                this.state.particles.splice(i,1);
+            }
+        }
         for (let particle of this.state.particles) {
             particle.lifeTime += 10;
             if (particle.lifeTime > 500) {
-                particle.updateCords();
+                
             }
-            if (particle.lifeTime > 1000 * 10) {
-
-            }
+            particle.updateCords();
         }
         this.setState({
             particles: this.state.particles,
@@ -229,6 +232,9 @@ class TouchParticleSystem extends React.Component {
         setInterval(() => {
             this.updateParticles();
         }, 10)
+        setInterval(() => {
+            console.log(this.state.particles.length)
+        }, 500)
     }
     render () {
         let particleRenderer = this.state.particles.map(

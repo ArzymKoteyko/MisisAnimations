@@ -104,7 +104,7 @@ body {
     position: absolute;
     border-radius: 50%;
     background-color: rgb(18,44,117);
-    animation: 0.5s cubic-bezier(.51,1.62,.85,1.13) pop_up forwards;
+    /*animation: 0.5s cubic-bezier(.51,1.62,.85,1.13) pop_up forwards;*/
 }
 @keyframes pop_up 
 { 
