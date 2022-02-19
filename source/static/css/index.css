@@ -46,8 +46,8 @@ body {
     align-items: center;
 }
 .ProgressBarWindow {
-    width: 400px;
-    height: 400px;
+    width: 90%;
+    height: 50%;
     border: 5px solid rgb(184, 223, 255);
     border-radius: 40px;
     overflow: hidden;
@@ -59,14 +59,16 @@ body {
     background-size: 100%;
     transition: 2000ms linear;
     will-change: transform;
-    /*
-    mask-image: url(../img/image_2.png);
-    -webkit-mask-image: url(../img/image_2.png);
+    
+    mask-image: url(../img/nazvanie_shrift.svg);
+    -webkit-mask-image: url(../img/nazvanie_shrift.svg);
     mask-size: contain;
     -webkit-mask-size: contain;
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
-    */
+    mask-position: center center;
+    -webkit-mask-position: center center;
+    
 }
 .ProgressBarBodyL1 {
     background-image: url(../img/WaveL1.svg);
@@ -86,4 +88,35 @@ body {
     border-radius: 50px;
     text-align: center;
     font-size: 40px;
+}
+
+.Circle {
+    overflow: hidden;
+}
+.Circle, .Circle ul, .Circle ul li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%
+}
+.Circle div {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgb(18,44,117);
+    animation: 0.5s cubic-bezier(.51,1.62,.85,1.13) pop_up;
+}
+@keyframes pop_up 
+{ 
+    from { margin-top:0px; } 
+    to { margin-top:-200px; }
+}
+.atractor {
+    position: absolute;
+    top: 490;
+    left: 490;
+    width: 20;
+    height: 20;
+    border-radius: 50%;
+    background-color: black;
 }
